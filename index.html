@@ -1,31 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judo Dashboard</title>
+    <title>judo dashboard</title>
     <style>
+        /* Fallback fonts voor het geval Brown en HK Grotesk niet lokaal geïnstalleerd zijn */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+        /* Custom font definities (indien lokaal aanwezig) */
+        @font-face {
+            font-family: 'Brown';
+            src: local('Brown bold'), local('Brown-Bold');
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: 'HK Grotesk';
+            src: local('HK Grotesk'), local('HKGrotesk-Regular');
+            font-weight: normal;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* HK Grotesk voor algemene tekst (met Open Sans als fallback) */
+            font-family: 'HK Grotesk', 'Open Sans', Helvetica, Arial, sans-serif;
             background-color: #f4f6f8;
             color: #333;
             margin: 0;
             padding: 40px 20px;
+            /* Alle teksten worden links uitgelijnd */
+            text-align: left; 
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding-bottom: 100px; /* Ruimte voor logo rechtsonder */
         }
+
+        h1, h2, h3, .tablinks {
+            /* Brown bold voor korte titels en koppen */
+            font-family: 'Brown', 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
         h1 {
-            text-align: center;
-            color: #1f77b4;
+            color: #00378a; /* NOC*NSF Blauw */
             margin-bottom: 30px;
         }
         
         /* Tab styling */
         .tabs {
             display: flex;
-            justify-content: center;
+            /* Links uitgelijnd in plaats van center */
+            justify-content: flex-start;
             margin-bottom: 30px;
             border-bottom: 2px solid #ddd;
         }
@@ -37,18 +64,17 @@
             padding: 14px 24px;
             transition: 0.3s;
             font-size: 1.1rem;
-            font-weight: bold;
             color: #666;
             border-bottom: 3px solid transparent;
         }
         .tablinks:hover {
-            color: #1f77b4;
+            color: #ff6600; /* NOC*NSF Oranje */
             background-color: #e9ecef;
             border-radius: 8px 8px 0 0;
         }
         .tablinks.active {
-            color: #1f77b4;
-            border-bottom: 3px solid #1f77b4;
+            color: #00378a; /* NOC*NSF Blauw */
+            border-bottom: 3px solid #ff6600; /* NOC*NSF Oranje lijn */
         }
         
         /* Verberg tab content standaard, behalve de actieve */
@@ -68,174 +94,217 @@
             gap: 20px;
         }
         .card {
-            background: white;
-            border-radius: 8px;
+            background: #ffffff;
+            border-radius: 0px; /* Strakke hoeken passen vaak beter bij zakelijke huisstijl */
+            border-top: 4px solid #00378a; /* NOC*NSF accent */
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none;
             color: inherit;
             display: block;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-top-color: #ff6600; /* Oranje bij hover */
         }
         .card h2 {
             margin-top: 0;
             font-size: 1.2rem;
-            color: #333;
+            color: #00378a; /* Blauwe koppen */
+            line-height: 1.3;
         }
         .card p {
-            color: #666;
-            font-size: 0.9rem;
+            color: #333;
+            font-size: 0.95rem;
             margin-bottom: 0;
         }
         .tag {
             display: inline-block;
-            background: #e1f5fe;
-            color: #1f77b4;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
             font-size: 0.8rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-transform: lowercase; /* Tags als kleine letters */
         }
         
-        /* Kleuren voor de verschillende tags */
-        .tag.herkomst { background: #e1f5fe; color: #1f77b4; }
-        .tag.conversie { background: #e8f5e9; color: #2e7d32; }
-        .tag.flow { background: #fff3e0; color: #e65100; }
+        /* NOC*NSF Huisstijl kleuren voor de verschillende tags */
+        .tag.herkomst { 
+            background: #00378a; /* Blauw */
+            color: #ffffff; 
+        }
+        .tag.conversie { 
+            background: #ff6600; /* Oranje */
+            color: #ffffff; 
+        }
+        .tag.flow { 
+            background: #e1001a; /* Rood */
+            color: #ffffff; 
+        }
+
+        /* Logo rechtsonder plaatsen met voldoende witruimte */
+        .logo-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            padding: 20px; /* Voldoende witruimte */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .logo-container img {
+            height: 60px; /* Pas dit aan indien nodig */
+            width: auto;
+            display: block;
+        }
+
+        /* Responsieve aanpassingen voor mobiel: logo naar linksboven of in flow */
+        @media (max-width: 768px) {
+            .logo-container {
+                position: static;
+                margin-top: 40px;
+                display: inline-block;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
+<!-- NOC*NSF Logo (Rechtsonder) -->
+<!-- Zorg dat "logo.png" of de correcte URL naar het full colour NOC*NSF logo hier wordt ingevuld -->
+<div class="logo-container">
+    <img src="https://nocnsf.nl/media/3110/nocnsf_logo.svg" alt="NOC*NSF Logo Full Colour">
+</div>
+
 <div class="container">
-    <h1>Judo Dashboard</h1>
+    <!-- Titels beginnen met kleine letter -->
+    <h1>judo dashboard</h1>
 
     <div class="tabs">
-        <button class="tablinks active" onclick="openTab(event, 'Herkomst')">Herkomst</button>
-        <button class="tablinks" onclick="openTab(event, 'Conversie')">Conversie</button>
-        <button class="tablinks" onclick="openTab(event, 'Flowdiagrammen')">Flowdiagrammen</button>
+        <button class="tablinks active" onclick="openTab(event, 'herkomst')">herkomst</button>
+        <button class="tablinks" onclick="openTab(event, 'conversie')">conversie</button>
+        <button class="tablinks" onclick="openTab(event, 'flowdiagrammen')">flowdiagrammen</button>
     </div>
 
-    <div id="Herkomst" class="tabcontent" style="display: block;">
+    <div id="herkomst" class="tabcontent" style="display: block;">
         <div class="grid">
             <a href="men_broad_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
             </a>
 
             <a href="women_broad_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
             </a>
             
             <a href="men_EK_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
             </a>
 
             <a href="women_EK_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
             </a>
 
             <a href="men_WK_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars mannen senioren; beste klasseringen bij WK U18/U21</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars mannen senioren; beste klasseringen bij WK U18/U21</h2>
             </a>
 
             <a href="women_WK_origination.html" class="card">
-                <span class="tag herkomst">Herkomst</span>
-                <h2>Herkomst medaillewinnaars vrouwen senioren; beste klasseringen bij WK U18/U21</h2>
+                <span class="tag herkomst">herkomst</span>
+                <h2>herkomst medaillewinnaars vrouwen senioren; beste klasseringen bij WK U18/U21</h2>
             </a>
         </div>
     </div>
 
-    <div id="Conversie" class="tabcontent">
+    <div id="conversie" class="tabcontent">
         <div class="grid">
             <a href="men_cadet_worlds_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars WK cadetten mannen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars WK cadetten mannen</h2>
             </a>
 
             <a href="women_cadet_worlds_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars WK cadetten vrouwen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars WK cadetten vrouwen</h2>
             </a>
 
             <a href="men_junior_worlds_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars WK junioren mannen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars WK junioren mannen</h2>
             </a>
 
             <a href="women_junior_worlds_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars WK junioren vrouwen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars WK junioren vrouwen</h2>
             </a>
 
             <a href="women_cadet_EC_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EK cadetten vrouwen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EK cadetten vrouwen</h2>
             </a>
 
             <a href="women_junior_EC_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EK junioren vrouwen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EK junioren vrouwen</h2>
             </a>
 
             <a href="women_cadet_EYOF_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EYOF vrouwen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EYOF vrouwen</h2>
             </a>
 
             <a href="men_cadet_EC_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EK cadetten mannen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EK cadetten mannen</h2>
             </a>
 
             <a href="men_junior_EC_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EK junioren mannen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EK junioren mannen</h2>
             </a>
             <a href="men_cadet_EYOF_conversion.html" class="card">
-                <span class="tag conversie">Conversie</span>
-                <h2>Conversie naar WK/OS vanaf medaillewinnaars EYOF mannen</h2>
+                <span class="tag conversie">conversie</span>
+                <h2>conversie naar WK/OS vanaf medaillewinnaars EYOF mannen</h2>
             </a>
         </div>
     </div>
 
-    <div id="Flowdiagrammen" class="tabcontent">
+    <div id="flowdiagrammen" class="tabcontent">
         <div class="grid">
             <a href="jouw_plotly_bestand.html" class="card">
-                <span class="tag flow">Flowdiagram</span>
-                <h2>Titel van je Plotly Flowdiagram</h2>
+                <span class="tag flow">flowdiagram</span>
+                <h2>titel van je plotly flowdiagram</h2>
                 <p>Klik hier om het interactieve model te openen.</p>
             </a>
-            </div>
+        </div>
     </div>
 
 </div>
 
 <script>
 function openTab(evt, tabName) {
-    // Declareer alle variabelen
     var i, tabcontent, tablinks;
 
-    // Verberg alle elementen met class="tabcontent"
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
-    // Verwijder de class "active" van alle elementen met class="tablinks"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
-    // Toon het huidige tabblad en voeg "active" toe aan de knop die de tab opende
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
