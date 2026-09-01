@@ -19,13 +19,49 @@
         h1 {
             text-align: center;
             color: #1f77b4;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
         }
-        p.subtitle {
-            text-align: center;
+        
+        /* Tab styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tablinks {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 24px;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            font-weight: bold;
             color: #666;
-            margin-bottom: 40px;
+            border-bottom: 3px solid transparent;
         }
+        .tablinks:hover {
+            color: #1f77b4;
+            background-color: #e9ecef;
+            border-radius: 8px 8px 0 0;
+        }
+        .tablinks.active {
+            color: #1f77b4;
+            border-bottom: 3px solid #1f77b4;
+        }
+        
+        /* Verberg tab content standaard, behalve de actieve */
+        .tabcontent {
+            display: none;
+            animation: fadeEffect 0.5s;
+        }
+        /* Animatie voor soepele overgang */
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -65,6 +101,11 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+        
+        /* Kleuren voor de verschillende tags */
+        .tag.herkomst { background: #e1f5fe; color: #1f77b4; }
+        .tag.conversie { background: #e8f5e9; color: #2e7d32; }
+        .tag.flow { background: #fff3e0; color: #e65100; }
     </style>
 </head>
 <body>
@@ -72,70 +113,104 @@
 <div class="container">
     <h1>Judo Conversie/Herkomst Dashboard</h1>
 
-    <div class="grid">
-        <!-- CARD 1 -->
-        <a href="men_broad_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
-        </a>
-
-        <!-- CARD 2 -->
-        <a href="women_broad_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
-        </a>
-        
-        <!-- CARD 3 -->
-        <a href="men_EK_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
-        </a>
-
-        <!-- CARD 4 -->
-        <a href="women_EK_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
-        </a>
-
-        <!-- CARD 5 -->
-        <a href="men_WK_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars mannen senioren; beste klasseringen bij WK U18/U21</h2>
-        </a>
-
-        <!-- CARD 6 -->
-        <a href="women_WK_origination.html" class="card">
-            <span class="tag">Herkomst</span>
-            <h2>Herkomst medaillewinnaars vrouwen senioren; beste klasseringen bij WK U18/U21</h2>
-        </a>
-
-        <!-- CARD 7 -->
-        <a href="men_cadet_worlds_conversion.html" class="card">
-            <span class="tag">Conversie</span>
-            <h2>Conversie naar WK/OS vanaf WK cadetten mannen</h2>
-        </a>
-
-        <!-- CARD 8 -->
-        <a href="women_cadet_worlds_conversion.html" class="card">
-            <span class="tag">Conversie</span>
-            <h2>Conversie naar WK/OS vanaf WK cadetten vrouwen</h2>
-        </a>
-
-        <!-- CARD 9 -->
-        <a href="men_junior_worlds_conversion.html" class="card">
-            <span class="tag">Conversie</span>
-            <h2>Conversie naar WK/OS vanaf WK junioren mannen</h2>
-        </a>
-
-        <!-- CARD 10 -->
-        <a href="women_junior_worlds_conversion.html" class="card">
-            <span class="tag">Conversie</span>
-            <h2>Conversie naar WK/OS vanaf WK junioren vrouwen</h2>
-        </a>
-
-        
+    <div class="tabs">
+        <button class="tablinks active" onclick="openTab(event, 'Herkomst')">Herkomst</button>
+        <button class="tablinks" onclick="openTab(event, 'Conversie')">Conversie</button>
+        <button class="tablinks" onclick="openTab(event, 'Flowdiagrammen')">Flowdiagrammen</button>
     </div>
+
+    <div id="Herkomst" class="tabcontent" style="display: block;">
+        <div class="grid">
+            <a href="men_broad_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+            </a>
+
+            <a href="women_broad_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+            </a>
+            
+            <a href="men_EK_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars mannen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
+            </a>
+
+            <a href="women_EK_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars vrouwen senioren (Uit Europa); beste klasseringen bij EK U18/U21</h2>
+            </a>
+
+            <a href="men_WK_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars mannen senioren; beste klasseringen bij WK U18/U21</h2>
+            </a>
+
+            <a href="women_WK_origination.html" class="card">
+                <span class="tag herkomst">Herkomst</span>
+                <h2>Herkomst medaillewinnaars vrouwen senioren; beste klasseringen bij WK U18/U21</h2>
+            </a>
+        </div>
+    </div>
+
+    <div id="Conversie" class="tabcontent">
+        <div class="grid">
+            <a href="men_cadet_worlds_conversion.html" class="card">
+                <span class="tag conversie">Conversie</span>
+                <h2>Conversie naar WK/OS vanaf WK cadetten mannen</h2>
+            </a>
+
+            <a href="women_cadet_worlds_conversion.html" class="card">
+                <span class="tag conversie">Conversie</span>
+                <h2>Conversie naar WK/OS vanaf WK cadetten vrouwen</h2>
+            </a>
+
+            <a href="men_junior_worlds_conversion.html" class="card">
+                <span class="tag conversie">Conversie</span>
+                <h2>Conversie naar WK/OS vanaf WK junioren mannen</h2>
+            </a>
+
+            <a href="women_junior_worlds_conversion.html" class="card">
+                <span class="tag conversie">Conversie</span>
+                <h2>Conversie naar WK/OS vanaf WK junioren vrouwen</h2>
+            </a>
+        </div>
+    </div>
+
+    <div id="Flowdiagrammen" class="tabcontent">
+        <div class="grid">
+            <a href="jouw_plotly_bestand.html" class="card">
+                <span class="tag flow">Flowdiagram</span>
+                <h2>Titel van je Plotly Flowdiagram</h2>
+                <p>Klik hier om het interactieve model te openen.</p>
+            </a>
+            </div>
+    </div>
+
 </div>
+
+<script>
+function openTab(evt, tabName) {
+    // Declareer alle variabelen
+    var i, tabcontent, tablinks;
+
+    // Verberg alle elementen met class="tabcontent"
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Verwijder de class "active" van alle elementen met class="tablinks"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Toon het huidige tabblad en voeg "active" toe aan de knop die de tab opende
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
 
 </body>
 </html>
