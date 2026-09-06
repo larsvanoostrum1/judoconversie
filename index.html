@@ -21,37 +21,34 @@
         }
 
         body {
-            /* HK Grotesk voor algemene tekst (met Open Sans als fallback) */
             font-family: 'HK Grotesk', 'Open Sans', Helvetica, Arial, sans-serif;
             background-color: #f4f6f8;
             color: #333;
             margin: 0;
             padding: 40px 20px;
-            /* Alle teksten worden links uitgelijnd */
             text-align: left; 
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding-bottom: 100px; /* Ruimte voor logo rechtsonder */
+            padding-bottom: 100px;
         }
 
         h1, h2, h3, .tablinks {
-            /* Brown bold voor korte titels en koppen */
             font-family: 'Brown', 'Montserrat', sans-serif;
             font-weight: bold;
         }
 
         h1 {
-            color: #00378a; /* NOC*NSF Blauw */
+            color: #00378a; 
             margin-bottom: 30px;
         }
         
         /* Tab styling */
         .tabs {
             display: flex;
-            /* Links uitgelijnd in plaats van center */
+            flex-wrap: wrap;
             justify-content: flex-start;
             margin-bottom: 30px;
             border-bottom: 2px solid #ddd;
@@ -63,26 +60,26 @@
             cursor: pointer;
             padding: 14px 24px;
             transition: 0.3s;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #666;
             border-bottom: 3px solid transparent;
         }
         .tablinks:hover {
-            color: #ff6600; /* NOC*NSF Oranje */
             background-color: #e9ecef;
             border-radius: 8px 8px 0 0;
         }
-        .tablinks.active {
-            color: #00378a; /* NOC*NSF Blauw */
-            border-bottom: 3px solid #ff6600; /* NOC*NSF Oranje lijn */
-        }
+
+        /* Actieve tab specifieke kleuren */
+        .tablinks.active[onclick*="'herkomst'"] { color: #00378a; border-bottom-color: #00378a; }
+        .tablinks.active[onclick*="'conversie-vanaf'"] { color: #ff6600; border-bottom-color: #ff6600; }
+        .tablinks.active[onclick*="'conversie-naar'"] { color: #e1001a; border-bottom-color: #e1001a; }
+        .tablinks.active[onclick*="'herkomst-flow'"] { color: #00a1de; border-bottom-color: #00a1de; }
+        .tablinks.active[onclick*="'conversie-flow'"] { color: #008b4b; border-bottom-color: #008b4b; }
         
-        /* Verberg tab content standaard, behalve de actieve */
         .tabcontent {
             display: none;
             animation: fadeEffect 0.5s;
         }
-        /* Animatie voor soepele overgang */
         @keyframes fadeEffect {
             from {opacity: 0;}
             to {opacity: 1;}
@@ -93,10 +90,12 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
+        
+        /* Basis Card Styling */
         .card {
             background: #ffffff;
-            border-radius: 0px; /* Strakke hoeken passen vaak beter bij zakelijke huisstijl */
-            border-top: 4px solid #00378a; /* NOC*NSF accent */
+            border-radius: 0px; 
+            border-top: 4px solid #ddd;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -104,15 +103,9 @@
             color: inherit;
             display: block;
         }
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            border-top-color: #ff6600; /* Oranje bij hover */
-        }
         .card h2 {
             margin-top: 0;
-            font-size: 1.2rem;
-            color: #00378a; /* Blauwe koppen */
+            font-size: 1.15rem;
             line-height: 1.3;
         }
         .card p {
@@ -120,48 +113,65 @@
             font-size: 0.95rem;
             margin-bottom: 0;
         }
+
+        /* --- THEMA KLEUREN PER TAB --- */
+        
+        /* 1. Herkomst (Blauw) */
+        #herkomst .card { border-top-color: #00378a; }
+        #herkomst .card h2 { color: #00378a; }
+        #herkomst .card:hover { box-shadow: 0 8px 15px rgba(0, 55, 138, 0.15); transform: translateY(-3px); }
+        .tag.t-herkomst { background: #00378a; color: #ffffff; }
+
+        /* 2. Conversie Vanaf (Oranje) */
+        #conversie-vanaf .card { border-top-color: #ff6600; }
+        #conversie-vanaf .card h2 { color: #ff6600; }
+        #conversie-vanaf .card:hover { box-shadow: 0 8px 15px rgba(255, 102, 0, 0.15); transform: translateY(-3px); }
+        .tag.t-conv-vanaf { background: #ff6600; color: #ffffff; }
+
+        /* 3. Conversie Naar (Rood) */
+        #conversie-naar .card { border-top-color: #e1001a; }
+        #conversie-naar .card h2 { color: #e1001a; }
+        #conversie-naar .card:hover { box-shadow: 0 8px 15px rgba(225, 0, 26, 0.15); transform: translateY(-3px); }
+        .tag.t-conv-naar { background: #e1001a; color: #ffffff; }
+
+        /* 4. Herkomst Flowdiagrammen (Lichtblauw) */
+        #herkomst-flow .card { border-top-color: #00a1de; }
+        #herkomst-flow .card h2 { color: #00a1de; }
+        #herkomst-flow .card:hover { box-shadow: 0 8px 15px rgba(0, 161, 222, 0.15); transform: translateY(-3px); }
+        .tag.t-herkomst-flow { background: #00a1de; color: #ffffff; }
+
+        /* 5. Conversie Flowdiagrammen (Groen) */
+        #conversie-flow .card { border-top-color: #008b4b; }
+        #conversie-flow .card h2 { color: #008b4b; }
+        #conversie-flow .card:hover { box-shadow: 0 8px 15px rgba(0, 139, 75, 0.15); transform: translateY(-3px); }
+        .tag.t-conv-flow { background: #008b4b; color: #ffffff; }
+
         .tag {
             display: inline-block;
             padding: 4px 10px;
             font-size: 0.8rem;
             font-weight: bold;
             margin-bottom: 12px;
-            text-transform: lowercase; /* Tags als kleine letters */
-        }
-        
-        /* NOC*NSF Huisstijl kleuren voor de verschillende tags */
-        .tag.herkomst { 
-            background: #00378a; /* Blauw */
-            color: #ffffff; 
-        }
-        .tag.conversie { 
-            background: #ff6600; /* Oranje */
-            color: #ffffff; 
-        }
-        .tag.flow { 
-            background: #e1001a; /* Rood */
-            color: #ffffff; 
+            text-transform: lowercase; 
         }
 
-        /* Logo rechtsonder plaatsen met voldoende witruimte */
+        /* Logo styling */
         .logo-container {
             position: fixed;
             bottom: 40px;
             right: 40px;
-            padding: 20px; /* Voldoende witruimte */
+            padding: 20px; 
             background: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             z-index: 1000;
         }
-        
         .logo-container img {
-            height: 60px; /* Pas dit aan indien nodig */
+            height: 60px; 
             width: auto;
             display: block;
         }
 
-        /* Responsieve aanpassingen voor mobiel: logo naar linksboven of in flow */
         @media (max-width: 768px) {
             .logo-container {
                 position: static;
@@ -176,7 +186,6 @@
 </head>
 <body>
 
-<!-- NOC*NSF Logo (Rechtsonder) -->
 <div class="logo-container">
     <img src="NOCNSF_LOGO_RGB-FC (Digitaal gebruik).png" alt="NOC*NSF Logo Full Colour">
 </div>
@@ -188,256 +197,238 @@
         <button class="tablinks active" onclick="openTab(event, 'herkomst')">herkomst</button>
         <button class="tablinks" onclick="openTab(event, 'conversie-vanaf')">conversie vanaf medaille</button>
         <button class="tablinks" onclick="openTab(event, 'conversie-naar')">conversie naar medaille</button>
-        <button class="tablinks" onclick="openTab(event, 'flowdiagrammen')">flowdiagrammen</button>
+        <button class="tablinks" onclick="openTab(event, 'herkomst-flow')">herkomst flowdiagrammen</button>
+        <button class="tablinks" onclick="openTab(event, 'conversie-flow')">conversie flowdiagrammen</button>
     </div>
 
+    <!-- TAB 1: HERKOMST (ALGEMEEN) -->
     <div id="herkomst" class="tabcontent" style="display: block;">
         <div class="grid">
             <a href="men_broad_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars mannen senioren (uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS mannen vanuit alle U18/U21 toernooien</h2>
             </a>
-
             <a href="women_broad_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars vrouwen senioren (uit Europa); beste klasseringen bij U18/U21 eindtoernooien</h2>
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS vrouwen vanuit alle U18/U21 toernooien</h2>
             </a>
             
-            <a href="men_EK_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars mannen senioren (uit Europa); beste klasseringen bij EK U18/U21</h2>
-            </a>
-
-            <a href="women_EK_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars vrouwen senioren (uit Europa); beste klasseringen bij EK U18/U21</h2>
-            </a>
-
             <a href="men_WK_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars mannen senioren; beste klasseringen bij WK U18/U21</h2>
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS mannen vanuit WK U18/U21</h2>
+            </a>
+            <a href="women_WK_origination.html" class="card">
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS vrouwen vanuit WK U18/U21</h2>
             </a>
 
-            <a href="women_WK_origination.html" class="card">
-                <span class="tag herkomst">herkomst</span>
-                <h2>herkomst medaillewinnaars vrouwen senioren; beste klasseringen bij WK U18/U21</h2>
+            <a href="men_EK_origination.html" class="card">
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS mannen vanuit EK U18/U21</h2>
+            </a>
+            <a href="women_EK_origination.html" class="card">
+                <span class="tag t-herkomst">herkomst</span>
+                <h2>herkomst WK/OS vrouwen vanuit EK U18/U21</h2>
             </a>
         </div>
     </div>
 
+    <!-- TAB 2: CONVERSIE VANAF (MEDAL TO MEDAL) -->
     <div id="conversie-vanaf" class="tabcontent">
         <div class="grid">
             <a href="men_cadet_worlds_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars WK cadetten mannen</h2>
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille WK cadetten mannen</h2>
             </a>
-
             <a href="women_cadet_worlds_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars WK cadetten vrouwen</h2>
-            </a>
-
-            <a href="men_junior_worlds_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars WK junioren mannen</h2>
-            </a>
-
-            <a href="women_junior_worlds_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars WK junioren vrouwen</h2>
-            </a>
-
-            <a href="women_cadet_EC_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EK cadetten vrouwen</h2>
-            </a>
-
-            <a href="women_junior_EC_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EK junioren vrouwen</h2>
-            </a>
-
-            <a href="women_cadet_EYOF_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EYOF vrouwen</h2>
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille WK cadetten vrouwen</h2>
             </a>
 
             <a href="men_cadet_EC_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EK cadetten mannen</h2>
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EK cadetten mannen</h2>
+            </a>
+            <a href="women_cadet_EC_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EK cadetten vrouwen</h2>
+            </a>
+
+            <a href="men_cadet_EYOF_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EYOF mannen</h2>
+            </a>
+            <a href="women_cadet_EYOF_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EYOF vrouwen</h2>
+            </a>
+
+            <a href="men_junior_worlds_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille WK junioren mannen</h2>
+            </a>
+            <a href="women_junior_worlds_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille WK junioren vrouwen</h2>
             </a>
 
             <a href="men_junior_EC_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EK junioren mannen</h2>
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EK junioren mannen</h2>
             </a>
-            
-            <a href="men_cadet_EYOF_conversion.html" class="card">
-                <span class="tag conversie">conversie vanaf medaille</span>
-                <h2>conversie naar WK/OS vanaf medaillewinnaars EYOF mannen</h2>
+            <a href="women_junior_EC_conversion.html" class="card">
+                <span class="tag t-conv-vanaf">conversie vanaf medaille</span>
+                <h2>conversie naar WK/OS vanaf medaille EK junioren vrouwen</h2>
             </a>
         </div>
     </div>
 
+    <!-- TAB 3: CONVERSIE NAAR (PARTICIPANTS TO MEDAL) -->
     <div id="conversie-naar" class="tabcontent">
         <div class="grid">
-
-            <a href="men_junior_WC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie junioren WK mannen naar medaille WK/OS</h2>
+            <a href="men_cadet_worlds_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers WK cadetten mannen</h2>
             </a>
-            
-            <a href="men_cadet_WC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie cadetten WK mannen naar medaille WK/OS</h2>
-            </a>
-            
-            <a href="men_EYOF_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie EYOF mannen naar medaille WK/OS</h2>
-            </a>
-            
-            <a href="men_junior_EC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie junioren EK mannen naar medaille WK/OS</h2>
-            </a>
-            
-            <a href="men_cadet_EC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie cadetten EK mannen naar medaille WK/OS</h2>
+            <a href="women_cadet_worlds_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers WK cadetten vrouwen</h2>
             </a>
 
-            <a href="women_junior_WC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie junioren WK vrouwen naar medaille WK/OS</h2>
+            <a href="men_cadet_EC_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EK cadetten mannen</h2>
             </a>
-            
-            <a href="women_cadet_WC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie cadetten WK vrouwen naar medaille WK/OS</h2>
+            <a href="women_cadet_EC_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EK cadetten vrouwen</h2>
             </a>
-            
-            <a href="women_EYOF_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie EYOF vrouwen naar medaille WK/OS</h2>
+
+            <a href="men_cadet_EYOF_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EYOF mannen</h2>
             </a>
-            
-            <a href="women_junior_EC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie junioren EK vrouwen naar medaille WK/OS</h2>
+            <a href="women_cadet_EYOF_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EYOF vrouwen</h2>
             </a>
-            
-            <a href="women_cadet_EC_cohort_conversion.html" class="card">
-                <span class="tag conversie">conversie naar medaille</span>
-                <h2>conversie cadetten EK vrouwen naar medaille WK/OS</h2>
+
+            <a href="men_junior_worlds_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers WK junioren mannen</h2>
+            </a>
+            <a href="women_junior_worlds_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers WK junioren vrouwen</h2>
+            </a>
+
+            <a href="men_junior_EC_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EK junioren mannen</h2>
+            </a>
+            <a href="women_junior_EC_to_medal.html" class="card">
+                <span class="tag t-conv-naar">conversie naar medaille</span>
+                <h2>conversie naar WK/OS vanuit deelnemers EK junioren vrouwen</h2>
             </a>
         </div>
     </div>
 
-    <div id="flowdiagrammen" class="tabcontent">
+    <!-- TAB 4: HERKOMST FLOWDIAGRAMMEN -->
+    <div id="herkomst-flow" class="tabcontent">
         <div class="grid">
-            <!-- Flowdiagrammen Herkomst Mannen -->
             <a href="men_cadet_WC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS mannen vanuit cadetten WK</h2>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS mannen vanuit WK cadetten</h2>
+            </a>
+            <a href="women_cadet_WC_flowdiagram_origination.html" class="card">
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS vrouwen vanuit WK cadetten</h2>
             </a>
             
             <a href="men_cadet_EC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS mannen vanuit cadetten EK</h2>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS mannen vanuit EK cadetten</h2>
+            </a>
+            <a href="women_cadet_EC_flowdiagram_origination.html" class="card">
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS vrouwen vanuit EK cadetten</h2>
             </a>
             
             <a href="men_EYOF_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
                 <h2>flowdiagram herkomst WK/OS mannen vanuit EYOF</h2>
             </a>
-            
-            <a href="men_junior_WC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS mannen vanuit junioren WK</h2>
-            </a>
-            
-            <a href="men_junior_EC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS mannen vanuit junioren EK</h2>
-            </a>
-
-            <!-- Flowdiagrammen Conversie Mannen -->
-            <a href="men_cadet_WC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie cadetten WK mannen naar WK/OS</h2>
-            </a>
-            
-            <a href="men_cadet_EC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie cadetten EK mannen naar WK/OS</h2>
-            </a>
-            
-            <a href="men_EYOF_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie EYOF mannen naar WK/OS</h2>
-            </a>
-            
-            <a href="men_junior_WC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie junioren WK mannen naar WK/OS</h2>
-            </a>
-            
-            <a href="men_junior_EC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie junioren EK mannen naar WK/OS</h2>
-            </a>
-
-            <!-- Flowdiagrammen Herkomst Vrouwen -->
-            <a href="women_cadet_WC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS vrouwen vanuit cadetten WK</h2>
-            </a>
-            
-            <a href="women_cadet_EC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS vrouwen vanuit cadetten EK</h2>
-            </a>
-            
             <a href="women_EYOF_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
                 <h2>flowdiagram herkomst WK/OS vrouwen vanuit EYOF</h2>
             </a>
             
+            <a href="men_junior_WC_flowdiagram_origination.html" class="card">
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS mannen vanuit WK junioren</h2>
+            </a>
             <a href="women_junior_WC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS vrouwen vanuit junioren WK</h2>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS vrouwen vanuit WK junioren</h2>
             </a>
             
+            <a href="men_junior_EC_flowdiagram_origination.html" class="card">
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS mannen vanuit EK junioren</h2>
+            </a>
             <a href="women_junior_EC_flowdiagram_origination.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram herkomst WK/OS vrouwen vanuit junioren EK</h2>
+                <span class="tag t-herkomst-flow">flowdiagram</span>
+                <h2>flowdiagram herkomst WK/OS vrouwen vanuit EK junioren</h2>
             </a>
+        </div>
+    </div>
 
-            <!-- Flowdiagrammen Conversie Vrouwen -->
+    <!-- TAB 5: CONVERSIE FLOWDIAGRAMMEN -->
+    <div id="conversie-flow" class="tabcontent">
+        <div class="grid">
+            <a href="men_cadet_WC_flowdiagram_conversion.html" class="card">
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie WK cadetten mannen naar WK/OS</h2>
+            </a>
             <a href="women_cadet_WC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie cadetten WK vrouwen naar WK/OS</h2>
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie WK cadetten vrouwen naar WK/OS</h2>
             </a>
             
+            <a href="men_cadet_EC_flowdiagram_conversion.html" class="card">
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie EK cadetten mannen naar WK/OS</h2>
+            </a>
             <a href="women_cadet_EC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie cadetten EK vrouwen naar WK/OS</h2>
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie EK cadetten vrouwen naar WK/OS</h2>
             </a>
             
+            <a href="men_EYOF_flowdiagram_conversion.html" class="card">
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie EYOF mannen naar WK/OS</h2>
+            </a>
             <a href="women_EYOF_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
+                <span class="tag t-conv-flow">flowdiagram</span>
                 <h2>flowdiagram conversie EYOF vrouwen naar WK/OS</h2>
             </a>
             
+            <a href="men_junior_WC_flowdiagram_conversion.html" class="card">
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie WK junioren mannen naar WK/OS</h2>
+            </a>
             <a href="women_junior_WC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie junioren WK vrouwen naar WK/OS</h2>
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie WK junioren vrouwen naar WK/OS</h2>
             </a>
             
+            <a href="men_junior_EC_flowdiagram_conversion.html" class="card">
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie EK junioren mannen naar WK/OS</h2>
+            </a>
             <a href="women_junior_EC_flowdiagram_conversion.html" class="card">
-                <span class="tag flow">flowdiagram</span>
-                <h2>flowdiagram conversie junioren EK vrouwen naar WK/OS</h2>
+                <span class="tag t-conv-flow">flowdiagram</span>
+                <h2>flowdiagram conversie EK junioren vrouwen naar WK/OS</h2>
             </a>
         </div>
     </div>
