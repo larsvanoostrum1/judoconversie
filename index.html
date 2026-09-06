@@ -21,27 +21,30 @@
         }
 
         body {
+            /* HK Grotesk voor algemene tekst (met Open Sans als fallback) */
             font-family: 'HK Grotesk', 'Open Sans', Helvetica, Arial, sans-serif;
             background-color: #f4f6f8;
             color: #333;
             margin: 0;
             padding: 40px 20px;
+            /* Alle teksten worden links uitgelijnd */
             text-align: left; 
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding-bottom: 100px;
+            padding-bottom: 100px; /* Ruimte voor logo rechtsonder */
         }
 
         h1, h2, h3, .tablinks {
+            /* Brown bold voor korte titels en koppen */
             font-family: 'Brown', 'Montserrat', sans-serif;
             font-weight: bold;
         }
 
         h1 {
-            color: #00378a; 
+            color: #00378a; /* NOC*NSF Blauw */
             margin-bottom: 30px;
         }
         
@@ -49,6 +52,7 @@
         .tabs {
             display: flex;
             flex-wrap: wrap;
+            /* Links uitgelijnd in plaats van center */
             justify-content: flex-start;
             margin-bottom: 30px;
             border-bottom: 2px solid #ddd;
@@ -60,26 +64,26 @@
             cursor: pointer;
             padding: 14px 24px;
             transition: 0.3s;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: #666;
             border-bottom: 3px solid transparent;
         }
         .tablinks:hover {
+            color: #ff6600; /* NOC*NSF Oranje */
             background-color: #e9ecef;
             border-radius: 8px 8px 0 0;
         }
-
-        /* Actieve tab specifieke kleuren */
-        .tablinks.active[onclick*="'herkomst'"] { color: #00378a; border-bottom-color: #00378a; }
-        .tablinks.active[onclick*="'conversie-vanaf'"] { color: #ff6600; border-bottom-color: #ff6600; }
-        .tablinks.active[onclick*="'conversie-naar'"] { color: #e1001a; border-bottom-color: #e1001a; }
-        .tablinks.active[onclick*="'herkomst-flow'"] { color: #00a1de; border-bottom-color: #00a1de; }
-        .tablinks.active[onclick*="'conversie-flow'"] { color: #008b4b; border-bottom-color: #008b4b; }
+        .tablinks.active {
+            color: #00378a; /* NOC*NSF Blauw */
+            border-bottom: 3px solid #ff6600; /* NOC*NSF Oranje lijn */
+        }
         
+        /* Verberg tab content standaard, behalve de actieve */
         .tabcontent {
             display: none;
             animation: fadeEffect 0.5s;
         }
+        /* Animatie voor soepele overgang */
         @keyframes fadeEffect {
             from {opacity: 0;}
             to {opacity: 1;}
@@ -91,11 +95,11 @@
             gap: 20px;
         }
         
-        /* Basis Card Styling */
+        /* Oorspronkelijke Card Styling (Uniform voor alle tabs) */
         .card {
             background: #ffffff;
             border-radius: 0px; 
-            border-top: 4px solid #ddd;
+            border-top: 4px solid #00378a; /* NOC*NSF Blauw accent */
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -103,9 +107,15 @@
             color: inherit;
             display: block;
         }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-top-color: #ff6600; /* Oranje bij hover */
+        }
         .card h2 {
             margin-top: 0;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
+            color: #00378a; /* Blauwe koppen, blijft overal gelijk */
             line-height: 1.3;
         }
         .card p {
@@ -113,49 +123,26 @@
             font-size: 0.95rem;
             margin-bottom: 0;
         }
-
-        /* --- THEMA KLEUREN PER TAB --- */
         
-        /* 1. Herkomst (Blauw) */
-        #herkomst .card { border-top-color: #00378a; }
-        #herkomst .card h2 { color: #00378a; }
-        #herkomst .card:hover { box-shadow: 0 8px 15px rgba(0, 55, 138, 0.15); transform: translateY(-3px); }
-        .tag.t-herkomst { background: #00378a; color: #ffffff; }
-
-        /* 2. Conversie Vanaf (Oranje) */
-        #conversie-vanaf .card { border-top-color: #ff6600; }
-        #conversie-vanaf .card h2 { color: #ff6600; }
-        #conversie-vanaf .card:hover { box-shadow: 0 8px 15px rgba(255, 102, 0, 0.15); transform: translateY(-3px); }
-        .tag.t-conv-vanaf { background: #ff6600; color: #ffffff; }
-
-        /* 3. Conversie Naar (Rood) */
-        #conversie-naar .card { border-top-color: #e1001a; }
-        #conversie-naar .card h2 { color: #e1001a; }
-        #conversie-naar .card:hover { box-shadow: 0 8px 15px rgba(225, 0, 26, 0.15); transform: translateY(-3px); }
-        .tag.t-conv-naar { background: #e1001a; color: #ffffff; }
-
-        /* 4. Herkomst Flowdiagrammen (Lichtblauw) */
-        #herkomst-flow .card { border-top-color: #00a1de; }
-        #herkomst-flow .card h2 { color: #00a1de; }
-        #herkomst-flow .card:hover { box-shadow: 0 8px 15px rgba(0, 161, 222, 0.15); transform: translateY(-3px); }
-        .tag.t-herkomst-flow { background: #00a1de; color: #ffffff; }
-
-        /* 5. Conversie Flowdiagrammen (Groen) */
-        #conversie-flow .card { border-top-color: #008b4b; }
-        #conversie-flow .card h2 { color: #008b4b; }
-        #conversie-flow .card:hover { box-shadow: 0 8px 15px rgba(0, 139, 75, 0.15); transform: translateY(-3px); }
-        .tag.t-conv-flow { background: #008b4b; color: #ffffff; }
-
+        /* Basis styling voor tags */
         .tag {
             display: inline-block;
             padding: 4px 10px;
             font-size: 0.8rem;
             font-weight: bold;
             margin-bottom: 12px;
-            text-transform: lowercase; 
+            text-transform: lowercase; /* Tags als kleine letters */
+            color: #ffffff;
         }
+        
+        /* UNIEKE KLEUREN PER TAG/LABEL */
+        .tag.t-herkomst { background: #00378a; }       /* NOC*NSF Blauw */
+        .tag.t-conv-vanaf { background: #ff6600; }     /* NOC*NSF Oranje */
+        .tag.t-conv-naar { background: #e1001a; }      /* Rood */
+        .tag.t-herkomst-flow { background: #00a1de; }  /* Lichtblauw */
+        .tag.t-conv-flow { background: #008b4b; }      /* Groen */
 
-        /* Logo styling */
+        /* Logo rechtsonder plaatsen met voldoende witruimte */
         .logo-container {
             position: fixed;
             bottom: 40px;
@@ -166,12 +153,14 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             z-index: 1000;
         }
+        
         .logo-container img {
             height: 60px; 
             width: auto;
             display: block;
         }
 
+        /* Responsieve aanpassingen voor mobiel */
         @media (max-width: 768px) {
             .logo-container {
                 position: static;
@@ -186,6 +175,7 @@
 </head>
 <body>
 
+<!-- NOC*NSF Logo (Rechtsonder) -->
 <div class="logo-container">
     <img src="NOCNSF_LOGO_RGB-FC (Digitaal gebruik).png" alt="NOC*NSF Logo Full Colour">
 </div>
