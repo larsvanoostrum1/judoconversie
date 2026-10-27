@@ -1,7 +1,7 @@
 <h1> Judo Conversie/Herkomst Dashboard </h1>
 
 <h2> About </h2>
-<p>Dashboard made to visualise conversion from youth to senior judo tournaments, and origination of senior competitors in youth tournaments. The main goals of this project are to get insight into conversion and origination percentages between several tournaments, and observe trends over time. [LINK](https://larsvanoostrum1.github.io/judoconversie/index.html) </p>
+<p>Dashboard made to visualise conversion from youth to senior judo tournaments, and origination of senior competitors in youth tournaments. The main goals of this project are to get insight into conversion and origination percentages between several tournaments, and observe trends over time. (https://larsvanoostrum1.github.io/judoconversie/index.html) </p>
 
 <h2>Technicalities</h2>
-<p>Plotly dashboards built using custom functions in python, each individually exported to HTML files in the <code>plots/</code> folder.</p>
+<p>Plotly dashboards built using custom functions in python notebook, each individually exported to HTML files in the <code>plots/</code> folder.</p>
