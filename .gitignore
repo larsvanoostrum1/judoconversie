@@ -1,0 +1,2 @@
+# Raw CSV databases stay local and must not be published.
+*.csv
