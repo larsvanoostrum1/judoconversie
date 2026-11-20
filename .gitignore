@@ -1,2 +1,5 @@
 # Raw CSV databases stay local and must not be published.
 *.csv
+
+# Keep the local analysis notebook out of version control.
+/judo.ipynb
